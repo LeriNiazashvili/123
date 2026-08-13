@@ -1,0 +1,15 @@
+{% extends 'store/base.html' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">შენახვა</button>
+  </form>
+
+  <p><a href="{% url 'home' %}">უკან, სიაში</a></p>
+
+{% endblock %}

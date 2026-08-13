@@ -1,0 +1,16 @@
+{% extends 'store/base.html' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+
+  <p>ნამდვილად გინდა წაშალო <b>{{ product.name }}</b>?</p>
+
+  <form method="POST">
+    {% csrf_token %}
+    <button type="submit">დიახ, წაშალე</button>
+  </form>
+
+  <p><a href="{% url 'home' %}">გაუქმება</a></p>
+
+{% endblock %}

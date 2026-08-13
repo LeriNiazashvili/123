@@ -1,0 +1,15 @@
+{% extends 'store/base.html' %}
+
+{% block title %}შესვლა{% endblock %}
+
+{% block content %}
+
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">შესვლა</button>
+  </form>
+
+  <p>არ გაქვს ანგარიში? <a href="{% url 'register' %}">რეგისტრაცია</a></p>
+
+{% endblock %}

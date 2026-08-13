@@ -1,0 +1,14 @@
+{% extends 'store/base.html' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+
+  <p><b>Username:</b> {{ user.username }}</p>
+  <p><b>Email:</b> {{ user.email }}</p>
+  <p><b>სახელი:</b> {{ user.first_name }}</p>
+  <p><b>გვარი:</b> {{ user.last_name }}</p>
+
+  <p><a href="{% url 'profile_update' %}">რედაქტირება</a></p>
+
+{% endblock %}

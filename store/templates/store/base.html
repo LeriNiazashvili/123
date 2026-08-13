@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}{{ page_title|default:"მაღაზია" }}{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+  <header class="site-header">
+
+    <div class="header-top">
+      <a href="{% url 'home' %}" class="logo"> Electro</a>
+
+      <form method="GET" action="{% url 'home' %}" class="header-search">
+        <input type="text" name="q" placeholder="Search Looking For?" value="{{ search_query }}">
+        <select name="category">
+          <option value="">All Category</option>
+          {% for cat in categories %}
+          <option value="{{ cat.id }}" {% if selected_category.id == cat.id %}selected{% endif %}>{{ cat.name }}</option>
+          {% endfor %}
+        </select>
+        <button type="submit">🔍</button>
+      </form>
+
+      <div class="header-icons">
+        <span title="Wishlist">♡</span>
+        <span title="Cart">🛒 $0.00</span>
+      </div>
+    </div>
+
+    <nav class="header-nav">
+      <span class="categories-label">☰ All Categories</span>
+
+      <div class="nav-links">
+        <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a>
+        <a href="{% url 'home' %}">Shop</a>
+        <a href="#">Shop Cart</a>
+        <a href="#">Checkout</a>
+        <a href="#">Contact</a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'profile' %}">{{ user.username }}</a>
+          <a href="{% url 'logout' %}">გასვლა</a>
+        {% else %}
+          <a href="{% url 'login' %}">შესვლა</a>
+          <a href="{% url 'register' %}">რეგისტრაცია</a>
+        {% endif %}
+      </div>
+
+      <div class="phone-badge">📞 +0123 456 7890</div>
+    </nav>
+
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <h3>კატეგორიები</h3>
+      <ul class="category-list">
+        <li><a href="{% url 'home' %}" class="{% if not selected_category %}active{% endif %}">ყველა პროდუქტი</a></li>
+        {% for cat in categories %}
+        <li><a href="{% url 'category_products' cat.id %}" class="{% if selected_category.id == cat.id %}active{% endif %}">{{ cat.name }} ({{ cat.product_count }})</a></li>
+        {% endfor %}
+      </ul>
+
+      <h3>ბოლოს დამატებული</h3>
+      <ul class="latest-list">
+        {% for p in latest_products %}
+        <li>{{ p.name }} — {{ p.price }} ₾</li>
+        {% empty %}
+        <li>პროდუქტები არ არის</li>
+        {% endfor %}
+      </ul>
+    </aside>
+
+    <main class="content">
+      <h2>{{ page_title|default:"პროდუქტები" }}</h2>
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+
+</body>
+</html>
