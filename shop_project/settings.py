@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 
+
+import environ
+
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -127,7 +132,26 @@ LOGIN_REDIRECT_URL = 'profile'
 LOGOUT_REDIRECT_URL = 'home'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+
 # Django Debug Toolbar - მხოლოდ ლოკალურ დეველოპმენტში (DEBUG=True) ჩანს ბრაუზერში
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+
+import environ
+
+env = environ.Env()
+environ.Env.read_env(BASE_DIR / '.env')
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'leriniaza17@gmail.com'
+EMAIL_HOST_PASSWORD = 'yunk hjcz zchv vfib'
+DEFAULT_FROM_EMAIL = 'leriniaza17@gmail.com'

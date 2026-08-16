@@ -19,15 +19,6 @@ class StoreContextMixin:
 
 
 
-    
-
-
-
-
-# ==============================
-# ფილტრაციის საერთო ლოგიკა
-# (ძებნა სახელით, ფასის დიაპაზონი, მხოლოდ ფასდაკლებულები)
-# ==============================
 class ProductFilterMixin:
     def filter_queryset(self, queryset):
         request = self.request
@@ -55,7 +46,7 @@ class ProductFilterMixin:
 
     
 
-    def sort_queryset(self, queryset):          # <-- ეს ახალია
+    def sort_queryset(self, queryset):          
         sort = self.request.GET.get('sort', '')
         sort_options = {
             'price_asc': 'price',

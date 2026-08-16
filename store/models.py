@@ -14,6 +14,7 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=200, verbose_name="პროდუქტის სახელი")
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="ფასი")
+    image = models.ImageField(upload_to='products/', blank=True, null=True, verbose_name="სურათი")
     is_discounted = models.BooleanField(default=False, verbose_name="ფასდაკლება აქვს?")
     category = models.ForeignKey(
         Category, 
